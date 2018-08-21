@@ -1,0 +1,689 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 75px;
+}
+
+
+.bg-cover {
+  background: URL("../images/cuttingboard.min.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.bg-cover-faded {
+  background: URL("../images/cuttingboard.faded.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+body:not(.admin) > [class^="container"] {
+  padding: 150px 15px 0;
+}
+
+
+/* a {
+  color: #00B7FF;
+} */
+
+
+.navbar {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 0;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%; /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;;
+}
+
+
+
+
+/*
+ * Admin
+ */
+
+body.admin {
+  padding: 30px 0;
+}
+
+.admin>[class^="container"] {
+  padding: 0 5vw;
+}
+
+
+.admin table {
+  font-size: .875rem;
+}
+
+@media (min-width: 1200px) {
+  .admin table {
+    font-size: 1rem;
+  }
+}
+
+
+
+/*
+ * Sidebar
+ */
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  font-size: .875rem;
+}
+
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+  padding: 1rem 1rem;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+}
+
+.sidebar .nav-link.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather, .sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+
+
+/*
+ * Forms
+ */
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+.form-group-close .form-group {
+  margin-bottom: 0.25rem;
+}
+
+.form-control-slim {
+  max-width: 70px;
+}
+
+.form-control-sm {
+  font-size: 0.9rem;
+}
+
+.form-control-clear {
+  color: #ddd;
+  cursor: pointer;
+  font-size: inherit;
+  height: 100%;
+  padding-top: 0.35rem;
+  position: absolute;
+  right: 40px;
+  transition: 150ms color;
+  z-index: 10;
+}
+
+.form-control-clear:hover {
+  color: #bbb;
+}
+
+.form-control-clear.non-empty {
+  color: #e57373;
+}
+
+.custom-select {
+  font-size: 0.85rem;
+  max-width: 125px;
+}
+
+@media (min-width: 992px) {
+ .custom-select {
+   max-width: 175px;
+ }
+}
+
+.btn-select {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.form-row > .input-group, 
+.form-row > .input-group input[type="text"] {
+  border-radius: 4px 0 0 4px;
+}
+
+#recipe-ingredients {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .browse-options .form-group select.form-control {
+    font-size: 0.9rem;
+  }
+}
+
+
+
+/*
+ * search
+ */
+
+.twitter-typeahead {
+  width: 100%;
+}
+
+.tt-menu {
+  width: 100%;
+  background-color: #fff;
+  z-index: 20;
+  border-radius: 0 0 3px 3px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 0.25rem;
+}
+
+.tt-suggestion {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tt-highlight,
+.tt-cursor {
+  background: rgb(240, 248, 255);
+  z-index: 30;
+}
+
+.search-item {
+  padding: 0.25rem 1rem;
+  border-radius: inherit;
+}
+
+.search-item-name {
+  font-size: 0.9rem;
+}
+
+.search-item-type {
+  background-color: pink;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 400;
+  padding: 0.25rem;
+  text-align: center;
+  width: 5rem;
+}
+
+.search-empty {
+  font-size: 0.9rem;
+}
+
+.search-item-recipe {
+  background-color: #90CAF9;
+}
+
+.search-item-ingredient {
+  background-color: #80CBC4;
+}
+
+.search-item-category {
+  background-color: #9FA8DA;
+}
+
+.search-item-cuisine {
+  background-color: #FFCC80;
+}
+
+.search-item-diet {
+  background-color: #ef9a9a;
+}
+
+
+
+/*
+ * Tables
+ */
+
+.table {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+tr .form-control {
+  width: 100%;
+  width: calc(100% - 1rem);
+}
+
+td:nth-last-child(2) input,
+td:nth-last-child(2) select {
+  width: calc(100% - 6rem);
+}
+
+
+tr .form-control:not(:active) {
+  border:none;
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+}
+
+.table th {
+  padding-left: 1.5rem;
+}
+
+td.record-actions {
+  border: none;
+  position: absolute;
+  right: 2rem;
+  margin-top: 0.25rem;
+}
+
+
+
+/*
+ * Cards
+ */
+
+ .card-body {
+   padding: 2rem;
+   padding-bottom: 2.5rem;
+ }
+
+ .card-text {
+   font-size: 0.85rem;
+ }
+
+ .card-rounded-top {
+   border-radius: 2px 2px 0 0;
+   overflow: hidden;
+ }
+
+
+ .card-base {
+   align-items: flex-end;
+   justify-content: flex-end;
+   display: flex;
+   flex: 1;
+ }
+
+
+ .card-base i,
+ .card-head i {
+   color: #ccc;
+   margin: 0.25rem;
+   cursor: pointer;
+   transition: color 150ms;
+ }
+
+ .card-base i:hover,
+ .card-head i:hover {
+   color: #bbb;
+ }
+
+ .card-thumbs i.selected {
+   color: #007bff;
+ }
+
+
+ .bg-shade .card,
+ .bg-cover-faded .card {
+   box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.1);
+   transition: box-shadow 250ms;
+ }
+
+ .bg-shade .card:hover,
+ .bg-cover-faded .card:hover {
+   box-shadow: 0 3px 4px 3px rgba(0, 0, 0, 0.1);
+ }
+
+
+ .card-img-top {
+   background: #ddd;
+ }
+
+ .card-normalized {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+ }
+
+ .card-normalized .card-img-top {
+   flex: 1;
+ }
+
+ .card-normalized .card-body {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   flex: 1;
+   padding: 1.5rem 0 0;
+ }
+
+ .card-normalized .card-title {
+   flex: 1;
+   padding: 0 1rem;
+   margin-bottom: 1.5rem;
+ }
+
+ .card-normalized .card-text {
+   flex: 1;
+   padding: 0 1rem;
+   margin-bottom: 0.5rem;
+ }
+
+ .card-single .card-body {
+   padding: 0 0 3rem 0;
+   position: relative;
+ }
+
+ .card-single .card-head {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   padding-right: 1.5rem;
+   display: flex;
+   justify-content: space-between;
+ }
+
+ .card-head .card-thumbs {
+  flex: 1;
+  text-align: right;
+ }
+
+ .card-base {
+  align-items: flex-end;
+  justify-content: flex-end;
+  display: flex;
+  flex: 1;
+  padding-right: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.card-flex .card-base {
+  margin-top: 1rem;
+}
+
+.card-edit {
+  flex: 1;
+  text-align: left;
+  padding-left: 0.75rem;
+}
+
+ @media (min-width: 576px) {
+    .card-normalized:not(.card-flex) {
+      min-height: 20rem;
+    }
+
+    .card-normalized:not(.card-flex) .card-img-top {
+      height: 10rem;
+    }
+
+    .card-normalized .card-title {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-normalized .card-text {
+      font-size: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+ }
+ 
+ @media (min-width: 768px) {
+    .card-normalized .card-title {
+      margin-bottom: 0.75rem;
+    }
+
+    .card-single .card-title,
+    .card-single .card-subtitle,
+    .card-single .card-content {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+ }
+
+ @media (min-width: 992px) {
+    .card-normalized:not(.card-flex) {
+      min-height: 23rem;
+    }
+
+    .card-normalized:not(.card-flex) .card-img-top {
+      height: 12rem;
+    }
+
+    .card-normalized .card-title {
+      font-size: 1.1rem;
+      padding: 0 2rem;
+    }
+
+    .card-normalized .card-text {
+      font-size: 0.8rem;
+      padding: 0 2rem;
+    }
+ }
+
+ @media (min-width: 1200px) {
+   .card-normalized:not(.card-flex) {
+     min-height: 22rem;
+   }
+
+  .card-normalized:not(.card-flex) .card-img-top {
+    height: 12rem;
+  }
+
+   .card-normalized .card-title {
+     margin-bottom: 0.75rem;
+     font-size: 1rem;
+   }
+
+   .card-normalized .card-text {
+     font-size: 0.75rem;
+     margin-bottom: 0.5rem;
+   }
+ }
+
+
+/*
+ * Utilities
+ */
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.no-border {
+  border: none;
+}
+
+.strong-labels label {
+  font-weight: 500;
+  margin-bottom: 0;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+
+
+/*
+ * Images
+ */
+  .img-slate {
+    padding: 0;
+  }
+
+ .jumbotron .img-fluid {
+   width: 100%;
+   max-height: 350px;
+   object-fit: cover;
+ }
+
+ #wheelImg {
+   width: 50vw;
+   min-width: 150px;
+   max-width: 300px;
+ }
+
+ 
+
+/*
+ * Typography
+ */
+
+p.keep-spacing {
+  white-space: pre-wrap;
+  line-height: 125%;
+}
+
+
+/*
+ * buttons
+ */
+
+ .btn-icon {
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: transparent;
+   border: none;
+   height: 100%;
+   width: 100%;
+ }
+
+ .btn-icon i {
+   background-color: red;
+   font-size: 1.5rem;
+   height: inherit;
+   width: inherit;
+ }
+
+ .btn-row {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+ }
+
+ .btn-row .btn {
+   flex: 1;
+   margin-left: 1rem;
+   margin-right: 1rem;
+ }
+
+ .btn-inline {
+   width: 100%;
+   min-width: 170px;
+ }
+
+ .btn-nav-link {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-width: 6rem;
+   font-weight: 300;
+   padding-left: 1.2rem;
+   font-size: .9rem;
+ }
+
+.user-recipe-count {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.25rem;
+  font-size: 0.7rem;
+  border-radius: 50%;
+  margin-left: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 576px) {
+  .btn-nav-link {
+    min-width: 8rem;
+    font-size: 1rem;
+  }
+}
+
+ @media (min-width: 768px) {
+  .btn-nav-link {
+    min-width: 9rem;
+  }
+ }
+
+
+
+
+ /*
+  * alerts
+  */
+
+  .alert-response,
+  #alert-container {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    margin-left: 2rem;
+    z-index: 100;
+  }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include partials/head %>
+
+    <body class="bg-cover bg-cover-faded">
+      <% include partials/navbar %>
+
+        <div class="container align-items-center mb-5">
+
+          <div class="row align-items-center justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+              <div class="card no-border card-rounded-top card-single mb-5" id="<%= recipe.recipe_id %>">
+                <div class="jumbotron rounded img-slate">
+                  <% const placeholder = "/images/pot.svg";
+                     const image = (recipe.recipe_image_url == null) ? placeholder : recipe.recipe_image_url; %>
+                    <img class="img-fluid" src="<%= image %>" alt="">
+                </div>
+
+                <div class="card-body">
+                  <div class="card-head">
+                      <% if (recipe.user_id == null || recipe.user_id == user_id) { %>
+                        <a href="/recipes/<%= recipe.recipe_id %>/edit" class="card-edit">
+                          <i class="far fa-edit"></i>
+                        </a>
+                      <% } else { %>
+                        <div class="card-edit card-edit-locked">
+                          <i class="fas fa-lock"></i>
+                        </div>
+                      <% } %>
+
+                      <span class="card-thumbs">
+                        <% if (user_id) {
+                          const likedClass = (likedRecipes.includes(recipe.recipe_id) ? "selected" : "");
+                          const dislikedClass = (dislikedRecipes.includes(recipe.recipe_id) ? "selected" : ""); %>  
+                          <i class="far fa-thumbs-up recipe-like <%= likedClass %>" id="recipe-<%= recipe.recipe_id %>-like"></i>
+                          <i class="far fa-thumbs-down recipe-dislike <%= dislikedClass %>" id="recipe-<%= recipe.recipe_id %>-dislike"></i>
+                        <% } else { %>
+                          <a href="/login"><i class="far fa-thumbs-up"></i></a>
+                          <a href="/login"><i class="far fa-thumbs-down"></i></a>
+                        <% } %>
+                      </span>
+                  </div>
+
+                  <div class="card-title"><h4><%= recipe.recipe_name %></h4></div>
+                  <div class="card-subtitle"><%= recipe.recipe_description %></div>
+
+                  <div class="card-content">
+                    <ul class="nav nav-tabs mt-4">
+                      <li class="nav-item">
+                        <a class="nav-link active" data-target="#ingredients" data-toggle="tab">Ingredients</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" data-target="#instructions" data-toggle="tab">Instructions</a>
+                      </li>
+                    </ul>
+
+                    <div class="tab-content pt-4">
+                      <div class="tab-pane active" id="ingredients">
+                        <ul class="recipe-ingredients">
+                          <% for (let i = 0; i < recipe.ingredients.length; i++) { 
+                              const qty = recipe.ingredients[i].amount;
+                              const uom = recipe.ingredients[i].unit_of_measure_name ? recipe.ingredients[i].unit_of_measure_name + ' of' : '';
+                              const ing = recipe.ingredients[i].ingredient_name;
+                            %>
+                            <li><%= qty %> <%= uom %> <%= ing %></li>
+                          <% } %>
+                        </ul>
+                      </div>
+
+                      <div class="tab-pane" id="instructions">
+                        <p class="keep-spacing"><%= recipe.recipe_instructions %></p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div><!-- card-body -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <% include partials/footer %>
+        <% include partials/script %>
+        <script src="/javascripts/recipeCards.js"></script>
+    </body>
+</html>

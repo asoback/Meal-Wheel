@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <% include partials/head %>
+
+  <body class="bg-cover bg-cover-faded">
+		<% include partials/navbar %>
+		
+
+		<div class="container">
+			<h1 class="display-4 text-center mb-2"><%= page %></h1>
+
+			<div class="row justify-content-center align-items-center">
+				<div class="col-md-10 col-lg-8 col-xl-6">
+					<form id="recipe-form" class="strong-labels form-group-close mb-5">
+						<input type="hidden" name="recipe_id" id="recipe-id">
+						<input type="hidden" name="user_id" id="user-id">
+
+						<div class="form-group">
+							<label for="recipe_name">Recipe Name</label>
+							<input type="text" name="recipe_name" id="recipe-name" class="form-control" required>
+						</div>
+
+						<div class="form-group">
+							<label for="recipe_description">Description</label>
+							<input type="text" name="recipe_description" id="recipe-description" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label for="recipe_instructions">Instructions</label>
+							<textarea name="recipe_instructions" id="recipe-instructions" cols="30" rows="8" class="form-control"></textarea>
+						</div>
+
+						<div class="form-group">
+							<label for="recipe_image_url">Image URL</label>
+							<input type="url" class="form-control" name="recipe_image_url" id="recipe-image-url" placeholder="http(s):\\www.url.com">
+						</div>
+
+
+						<div class="form-row">
+							<div class="form-group col-sm-6">
+								<label for="recipe_category_id">Category</label>
+								<select class="form-control selectpicker" name="recipe_category_id" id="recipe-category" title="Choose Category" data-selected-text-format="value" data-size="5" data-header="Select one Category" required>
+									<% for (let i = 0; i < categories.length; i++) { %>
+										<option value="<%=categories[i].recipe_category_id %>"><%= categories[i].recipe_category_name %></option>
+									<% } %>
+								</select>							
+							</div>
+
+							<div class="form-group col-sm-6">
+								<label for="cuisine_id">Cuisine</label>
+								<select class="form-control selectpicker" multiple name="cuisine_id" id="recipe-cuisines" title="Choose Cuisine(s)" data-selected-text-format="count > 2" data-size="5" data-header="Select one or more Cuisine" required>
+									<% for (let i = 0; i < cuisines.length; i++) { %>
+										<option value="<%= cuisines[i].cuisine_id %>"><%= cuisines[i].cuisine_name %></option>
+									<% } %>
+								</select>
+							</div>
+						</div>
+
+	
+
+						<div class="pb-3" id="recipe-ingredients">
+							<label for="ingredient_name">Ingredients</label>
+
+							<div class="form-row mb-1 ingredient-row">
+								<div class="input-group">
+									<input type="hidden" name="ingredient_id" class="ingredient-id">
+									<input type="hidden" name="food_group_id" class="food-group-id" required>
+									<input type="text" class="form-control ingredient-name" name="ingredient_name" required placeholder="Ingredient">
+									<input type="number" step="0.1" class="form-control form-control-slim amount" placeholder="Qty" name="amount" min="0.1" required>
+
+									<select class="custom-select unit-of-measure" name="unit_of_measure_id">
+										<option value="" selected>Unit</option>
+										<% for (let i = 0; i < units.length; i++) { %>
+										<option value="<%= units[i].unit_of_measure_id %>"><%= units[i].unit_of_measure_name %></option>
+										<% } %>
+									</select> 
+
+									<div class="input-group-append">
+										<button class="btn btn-danger remove-ingredient" type="button">
+											<i class="fas fa-times"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+							
+
+						<div class="form-row justify-content-end mb-3 px-1">
+							<button type="button" class="btn btn-sm btn-secondary" id="add-ingredient-row">
+								<span><i class="fas fa-plus"></i></span>
+								<span class="ml-1">Add Ingredient</span>
+							</button>
+						</div>
+
+
+						<div class="form-group mt-4 mb-5">
+							<div class="row">
+								<div class="col-sm mb-3">
+									<input type="button" value="Delete Recipe" id="check-delete" class="btn btn-lg btn-block btn-light text-danger" data-toggle="modal" data-target="#confirm-delete">
+								</div>
+								<div class="col-sm mb-3 order-sm-0">
+									<input type="submit" value="Submit Recipe" id="submit-recipe" class="btn btn-lg btn-block btn-primary">
+								</div>
+							</div>
+						</div>
+
+
+							<!-- food group popover -->
+							<div id="popover-food-group" class="popover d-none">
+								<div class="form-row">
+									<div class="form-group">
+										<select class="form-control form-control-sm" id="food-group-selector">
+											<option value="" selected disabled hidden>-- Select --</option>
+											<% for (let i = 0; i < foodGroups.length; i++) { %>
+												<option value="<%= foodGroups[i].food_group_id %>"><%= foodGroups[i].food_group_name %></option>
+											<% } %>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-row">
+									<div class="form-group btn-row">
+										<div class="btn btn-sm btn-secondary" id="food-group-cancel">Cancel</div>
+										<div class="btn btn-sm btn-primary" id="food-group-select">Select</div>
+									</div>
+								</div>
+							</div>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- recipe delete confirmation modal -->
+		<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Are you sure?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to delete this recipe? This cannot be undone.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						<button type="button" class="btn btn-danger" id="delete-recipe" data-dismiss="modal">Yes, Delete It</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- response alert -->
+		<div id="alert-container" class="fade show"></div>
+		<!-- <div class="alert alert-success alert-response alert-dismissible fade" role="alert" id="db-response"></div> -->
+
+
+    <% include partials/footer %>
+		<% include partials/script %>
+		<script src="/javascripts/tools/bootstrap3-typeahead.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+		<script>
+			const ingredientList = <%- JSON.stringify(ingredients) %>;
+			const unitList = <%- JSON.stringify(units) %>;
+			const currentRecipe = <%- JSON.stringify(recipe) %>;
+		</script>
+
+		<script src="/javascripts/addRecipe.js"></script>
+  </body>
+</html>
